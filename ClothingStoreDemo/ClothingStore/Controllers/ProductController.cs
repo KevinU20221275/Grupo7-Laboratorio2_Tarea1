@@ -54,7 +54,7 @@ namespace ClothingStore.Controllers
             {
                 _productRepository.Add(product);
 
-                TempData["message"] = "Datos Guardados con exito";
+                TempData["addProduct"] = "Datos Guardados con exito";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -94,7 +94,7 @@ namespace ClothingStore.Controllers
             {
                 _productRepository.Edit(product);
 
-                TempData["message"] = "Datos Editados con exito";
+                TempData["editProduct"] = "Datos Editados con exito";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -131,7 +131,7 @@ namespace ClothingStore.Controllers
             {
                 _productRepository.Delete(product.Id);
 
-                TempData["message"] = "Datos eliminados con exito";
+                TempData["deleteProduct"] = "Datos eliminados con exito";
 
                 return RedirectToAction(nameof(Index));
             }
