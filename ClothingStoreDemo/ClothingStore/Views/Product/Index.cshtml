@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ClothingStore.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Productos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar Producto</a>
+</p>
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table table-bordered table-striped table-responsive mt-2">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Producto
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Talla
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @item.Category?.CategoryName
+            </td>
+            <td>
+                @item.Size?.SizeDescription
+            </td>
+            <td>
+                <a asp-controller="Product"
+                       asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-warning">
+                        Editar
+                </a>
+                <a asp-controller="Product"
+                       asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger">
+                        Eliminar
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

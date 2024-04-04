@@ -1,0 +1,70 @@
+﻿@model ClothingStore.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar Producto</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-2">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select class="form-select" asp-for="CategoryId" asp-items="@ViewBag.Categories" id="categorySearch">
+                    <option value="">Seleccione una Categoria</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="SizeId" class="control-label"></label>
+                <select class="form-select" asp-for="SizeId" asp-items="@ViewBag.Sizes" id="sizeSearch">
+                    <option value="">Seleccione una Talla</option>
+                </select>
+                <span asp-validation-for="SizeId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Editar" class="btn btn-warning" />
+                <a asp-action="Index" class="btn btn-primary">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#sizeSearch').select2({
+            language: "es",
+            width: '100%',
+            placeholder: "Seleccione una talla",
+        });
+
+        $('#categorySearch').select2({
+            language: "es",
+            width: '100%',
+            placeholder: "Seleccione una Categoria",
+        });
+
+    </script>
+
+}
