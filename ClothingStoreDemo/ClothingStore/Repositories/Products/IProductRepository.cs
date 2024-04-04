@@ -9,5 +9,7 @@ namespace ClothingStore.Repositories.Products
         void Delete(int id);
         IEnumerable<Product> GetAll();
         Product? GetById(int id);
+        IEnumerable<Size> GetAllSizes();
+        IEnumerable<Category> GetAllCategories();
     }
 }

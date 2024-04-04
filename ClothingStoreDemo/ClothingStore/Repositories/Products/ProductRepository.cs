@@ -15,6 +15,26 @@ namespace ClothingStore.Repositories.Products
             _dataAccess = dataAccess;
         }
 
+        public IEnumerable<Category> GetAllCategories()
+        {
+            string query = "SELECT Id,CategoryName FROM Category";
+
+            using (var connection = _dataAccess.GetConnection())
+            {
+                return connection.Query<Category>(query);
+            }
+        }
+
+        public IEnumerable<Size> GetAllSizes()
+        {
+            string query = "SELECT Id,SizeDescription FROM Size";
+
+            using (var connection = _dataAccess.GetConnection())
+            {
+                return connection.Query<Size>(query);
+            }
+        }
+
         public IEnumerable<Product> GetAll()
         {
             using (var connection = _dataAccess.GetConnection())
