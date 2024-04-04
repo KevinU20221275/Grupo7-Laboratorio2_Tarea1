@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ClothingStore.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listado de Productos";
 }
 
 <h1>Lista de Productos</h1>
@@ -12,36 +12,22 @@
 
 @if (TempData["message"] != null)
 {
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
         @TempData["message"]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-<table class="table table-bordered table-striped table-responsive mt-2">
+<table id="productsTable" class="table table-bordered table-striped table-responsive mt-2">
     <thead>
         <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Producto
-            </th>
-            <th>
-                Descripcion
-            </th>
-            <th>
-                Precio
-            </th>
-            <th>
-                Categoria
-            </th>
-            <th>
-                Talla
-            </th>
-            <th>
-                Acciones
-            </th>
+            <th>Id</th>
+            <th>Producto</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Talla</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -83,3 +69,85 @@
 }
     </tbody>
 </table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#productsTable").DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                    {
+                        extend: 'csv',
+                        className: 'bg-info border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'bg-danger border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'bg-success border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        target: 6,
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            })
+        })
+    </script>
+
+    <!-- funcion para mostar los alert -->
+    <script>
+        function showToast(message, gradientColors) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to right, " + gradientColors + ")"
+                }
+            }).showToast();
+        }
+    </script>
+
+    @if (TempData["addProduct"] != null)
+    {
+        <script>
+            showToast("Se agrego correctamente el Producto", "#6ED725, #274412");
+        </script>
+    }
+
+    @if (TempData["editProduct"] != null)
+    {
+        <script>
+            showToast("Se edito correctamente el Producto", "#00b09b, #96c93d");
+        </script>
+    }
+
+    @if (TempData["deleteProduct"] != null)
+    {
+        <script>
+            showToast("Se Elimino correctamente el Producto", "#ff5500, #ff0000");
+        </script>
+    }
+
+
+}
