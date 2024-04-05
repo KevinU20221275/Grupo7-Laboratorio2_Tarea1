@@ -1,36 +1,33 @@
 ﻿@model IEnumerable<ClothingStore.Models.Customer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listado de Clientes";
 }
 
 <h1>Lista de Clientes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Agregar Cliente</a>
 </p>
-<table class="table">
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table id="customersTable" class="table table-bordered table-striped table-responsive mt-2">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th></th>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo Electronico</th>
+            <th>Telefono</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -72,3 +69,84 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#customersTable").DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                    {
+                        extend: 'csv',
+                        className: 'bg-info border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'bg-danger border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'bg-success border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5]
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        target: 6,
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            })
+        })
+    </script>
+
+    <!-- funcion para mostar los alert -->
+    <script>
+        function showToast(message, gradientColors) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to right, " + gradientColors + ")"
+                }
+            }).showToast();
+        }
+    </script>
+
+    @if (TempData["addCustomer"] != null)
+    {
+        <script>
+            showToast("Se agrego correctamente el Cliente", "#6ED725, #274412");
+        </script>
+    }
+
+    @if (TempData["editCustomer"] != null)
+    {
+        <script>
+            showToast("Se edito correctamente el Cliente", "#00b09b, #96c93d");
+        </script>
+    }
+
+    @if (TempData["deleteCustomer"] != null)
+    {
+        <script>
+            showToast("Se Elimino correctamente el Cliente", "#ff5500, #ff0000");
+        </script>
+    }
+
+
+}

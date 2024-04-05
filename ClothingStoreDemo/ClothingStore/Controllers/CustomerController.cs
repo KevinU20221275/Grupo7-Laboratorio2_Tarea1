@@ -42,9 +42,13 @@ namespace ClothingStore.Controllers
             {
                 _customerRepository.Add(customer);
 
+                TempData["addCustomer"] = "Datos Guardados con exito";
+
                 return RedirectToAction(nameof(Index));
             }
-            catch            {
+            catch (Exception ex)
+            {
+                TempData["message"] = ex.Message;
 
                 return View(customer);
             }
@@ -72,10 +76,14 @@ namespace ClothingStore.Controllers
             {
                 _customerRepository.Edit(customer);
 
+                TempData["editCustomer"] = "Datos Editados con exito";
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                TempData["message"] = ex.Message;
+
                 return View(customer);
             }
         }
@@ -102,10 +110,14 @@ namespace ClothingStore.Controllers
             {
                 _customerRepository.Delete(customer.Id);
 
+                TempData["deleteCustomer"] = "Datos eliminados con exito";
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                TempData["message"] = ex.Message;
+
                 return View(customer);
             }
         }
