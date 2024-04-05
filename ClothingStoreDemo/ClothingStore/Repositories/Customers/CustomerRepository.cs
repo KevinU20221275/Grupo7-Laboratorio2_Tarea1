@@ -18,7 +18,7 @@ namespace ClothingStore.Repositories.Customers
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storeProcedure = "SP_GetCustomers";
+                string storeProcedure = "spCustomer_GetAll";
 
                 return
                     connection.Query<Customer>(
@@ -32,11 +32,11 @@ namespace ClothingStore.Repositories.Customers
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "spProduct_GetById";
+                string storedProcedure = "spCustumer_GetById";
 
                 return connection.QueryFirstOrDefault<Customer>(
                             storedProcedure,
-                            new { CustomerId = id },
+                            new { Id = id },
                             commandType: CommandType.StoredProcedure
                     );
             }
@@ -46,7 +46,7 @@ namespace ClothingStore.Repositories.Customers
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "SP_InsertCustomer";
+                string storedProcedure = "spCustomer_Insert";
 
                 connection.Execute(
                         storedProcedure,
@@ -60,11 +60,11 @@ namespace ClothingStore.Repositories.Customers
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "SP_UpdateCustomer";
+                string storedProcedure = "spCustomer_Update";
 
                 connection.Execute(
                         storedProcedure,
-                        new { customer.CustomerFirstName, customer.CustomerLastName, customer.Email, customer.Phone, customer.Address },
+                        new { customer.Id, customer.CustomerFirstName, customer.CustomerLastName, customer.Email, customer.Phone, customer.Address },
                         commandType: CommandType.StoredProcedure
                     );
             }
@@ -74,11 +74,11 @@ namespace ClothingStore.Repositories.Customers
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "SP_DeleteCustomer";
+                string storedProcedure = "spCustomer_Delete";
 
                 connection.Execute(
                         storedProcedure,
-                        new { CustomerId = id },
+                        new { Id = id },
                         commandType: CommandType.StoredProcedure
                     );
             }

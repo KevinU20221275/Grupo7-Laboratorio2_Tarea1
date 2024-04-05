@@ -1,4 +1,5 @@
 using ClothingStore.Data;
+using ClothingStore.Repositories.Customers;
 using ClothingStore.Repositories.Products;
 using ClothingStore.Repositories.Sales;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 
