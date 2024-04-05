@@ -57,20 +57,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Salary)
             </td>
-                <td>
-                    <a asp-controller="Employee"
-                       asp-action="Edit"
-                       asp-route-id="@item.Id"
-                       class="btn btn-warning">
-                        Editar
-                    </a>
-                    <a asp-controller="Employee"
-                       asp-action="Delete"
-                       asp-route-id="@item.Id"
-                       class="btn btn-danger">
-                        Eliminar
-                    </a>
-                </td>
+            <td>
+                <a asp-controller="Employee"
+                    asp-action="Edit"
+                    asp-route-id="@item.Id"
+                    class="btn btn-warning">
+                    Editar
+                </a>
+                <a asp-controller="Employee"
+                    asp-action="Delete"
+                    asp-route-id="@item.Id"
+                    class="btn btn-danger">
+                    Eliminar
+                </a>
+            </td>
         </tr>
 }
     </tbody>
@@ -133,21 +133,21 @@
         }
     </script>
 
-    @if (TempData["addProduct"] != null)
+    @if (TempData["addEmployee"] != null)
     {
         <script>
             showToast("Se agrego correctamente el Empleado", "#6ED725, #274412");
         </script>
     }
 
-    @if (TempData["editProduct"] != null)
+    @if (TempData["editEmployee"] != null)
     {
         <script>
             showToast("Se edito correctamente el Empleado", "#00b09b, #96c93d");
         </script>
     }
 
-    @if (TempData["deleteProduct"] != null)
+    @if (TempData["deleteEmployee"] != null)
     {
         <script>
             showToast("Se Elimino correctamente el Empleado", "#ff5500, #ff0000");
