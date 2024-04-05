@@ -21,6 +21,8 @@ namespace ClothingStore.Models
         [Display(Name = "Talla")]
         public int SizeId { get; set; }
 
+        public string ProductInfo { get; set; }
+
         public Category? Category { get; set; }
 
         public Size? Size { get; set; }
