@@ -1,0 +1,68 @@
+﻿@model ClothingStore.Models.Sale
+
+@{
+    ViewData["Title"] = "Eliminar Venta";
+}
+
+<h1>Eliminar Venta</h1>
+
+<h3>¿Estas seguro que quieres eliminar este venta?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 mt-3">
+            Id Venta
+        </dt>
+        <dd class="col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Id Cliente
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Id Empleado
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Id Producto
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Cantidad
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Precio Unitario
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Total
+        </dt>
+        <dd class="col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt class="col-sm-2 mt-3">
+            Fecha
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.SaleDate)
+        </dd>
+        
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+        <a asp-action="Index" class="btn btn-primary">Volver al Listado</a>
+    </form>
+</div>

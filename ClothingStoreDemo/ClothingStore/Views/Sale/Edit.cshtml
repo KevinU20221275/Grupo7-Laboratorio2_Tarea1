@@ -1,0 +1,79 @@
+﻿@model ClothingStore.Models.Sale
+
+@{
+    ViewData["Title"] = "Editar Venta";
+}
+
+<h1>Editar Venta</h1>
+
+
+<hr />
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mt-3">
+                    <label asp-for="CustomerId" class="control-label"></label>
+                    <select class="form-select" asp-for="CustomerId" asp-items="@ViewBag.Customers" id="customerSearch">
+                        <option value="">Seleccione una Categoria</option>
+                    </select>
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select class="form-select" asp-for="EmployeeId" asp-items="@ViewBag.Employees" id="employeeSearch">
+                        <option value="">Seleccione una Categoria</option>
+                    </select>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="ProductId" class="control-label"></label>
+                    <select class="form-select" asp-for="ProductId" asp-items="@ViewBag.Products" id="productSearch">
+                        <option value="">Seleccione una Categoria</option>
+                    </select>
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="SaleDate" class="control-label"></label>
+                    <input asp-for="SaleDate" class="form-control" />
+                    <span asp-validation-for="SaleDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" value="Editar" class="btn btn-warning" />
+                    <a asp-action="Index" class="btn btn-primary">Volver al listado</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#customerSearch').select2({
+            language: "es",
+            width: '100%',
+            placeholder: "Seleccione el Cliente",
+        });
+
+        $('#employeeSearch').select2({
+            language: "es",
+            width: '100%',
+            placeholder: "Seleccione el Empleado",
+        });
+
+        $('#productSearch').select2({
+            language: "es",
+            width: '100%',
+            placeholder: "Seleccione un Producto",
+        });
+
+    </script>
+}

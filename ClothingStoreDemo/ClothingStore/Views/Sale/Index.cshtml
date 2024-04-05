@@ -1,0 +1,161 @@
+﻿@model IEnumerable<ClothingStore.Models.Sale>
+
+@{
+    ViewData["Title"] = "Listado de Ventas";
+}
+
+<h1>Listado de Ventas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar Venta</a>
+</p>
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table table-estriped table-responsive table-bordered mt-2" id="salesTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Empleado</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @item.Customer.CustomerName
+            </td>
+            <td>
+                @item.Employee.EmployeeName
+            </td>
+            <td>
+                @item.Product.ProductName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleDate)
+            </td>
+                <td>
+                    <a asp-controller="Sale"
+                       asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-warning">
+                        Editar
+                    </a>
+                    <a asp-controller="Sale"
+                       asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger">
+                        Eliminar
+                    </a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#salesTable").DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                    {
+                        extend: 'csv',
+                        className: 'bg-info border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5,6,7]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'bg-danger border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5,6,7]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'bg-success border-0 text-white',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5,6,7]
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        target: 8,
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            })
+        })
+    </script>
+
+    <!-- funcion para mostar los alert -->
+    <script>
+        function showToast(message, gradientColors) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to right, " + gradientColors + ")"
+                }
+            }).showToast();
+        }
+    </script>
+
+    @if (TempData["addSale"] != null)
+    {
+        <script>
+            showToast("Se agrego la venta correctamente", "#6ED725, #274412");
+        </script>
+    }
+
+    @if (TempData["editSale"] != null)
+    {
+        <script>
+            showToast("Se edito la venta correctamente", "#00b09b, #96c93d");
+        </script>
+    }
+
+    @if (TempData["deleteSale"] != null)
+    {
+        <script>
+            showToast("Se Elimino la Venta correctamente", "#ff5500, #ff0000");
+        </script>
+    }
+
+
+}
