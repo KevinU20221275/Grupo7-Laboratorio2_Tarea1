@@ -3,6 +3,7 @@ using ClothingStore.Repositories.Customers;
 using ClothingStore.Repositories.Employees;
 using ClothingStore.Repositories.Products;
 using ClothingStore.Repositories.Sales;
+using ClothingStore.Repositories.Sizes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddScoped<ISizeRepository, SizeRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
