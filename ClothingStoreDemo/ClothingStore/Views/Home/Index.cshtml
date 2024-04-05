@@ -2,7 +2,157 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Ropa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .section {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .productos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .producto {
+            width: 300px;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+            .producto img {
+                width: 100%;
+                max-height: 200px;
+                object-fit: cover;
+            }
+
+            .producto h3 {
+                margin-top: 10px;
+            }
+
+            .producto p {
+                margin: 10px 0;
+            }
+
+            .producto .precio {
+                font-weight: bold;
+            }
+
+            .producto button {
+                background-color: #333;
+                color: #fff;
+                padding: 5px 10px;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .producto button:hover {
+                    background-color: #555;
+            }
+
+    </style>
+</head>
+<body>
+       <section id="inicio" class="section">
+        <div class="container">
+            <h2>Bienvenido a nuestra tienda de ropa</h2>
+            <p>Descubre las últimas tendencias en moda masculina y femenina.</p>
+            <a href="#productos" class="btn">Ver productos</a>
+        </div>
+    </section>
+    <section id="productos" class="section">
+        <div class="container">
+            <h2>Nuestros productos</h2>
+            <div class="productos">
+                <div class="producto">
+                    <img src="/img/Producto1.jpg" alt="Producto 1">
+                    <h3>Producto 1</h3>
+                    <p>Descripción del producto 1</p>
+                    <span class="precio">$20</span>
+                </div>
+                <div class="producto">
+                    <img src="/img/Producto2.jpg" alt="Producto 2">
+                    <h3>Producto 2</h3>
+                    <p>Descripción del producto 2</p>
+                    <span class="precio">$20</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="section">
+        <div class="container">
+            <h2>Sobre nosotros</h2>
+            <p>Somos una tienda dedicada a ofrecerte la mejor selección de ropa de moda para todas las ocasiones.</p>
+        </div>
+    </section>
+    <section id="contacto" class="section">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p>Puedes contactarnos a través de nuestro correo electrónico o redes sociales.</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; @DateTime.Now.Year Tienda de Ropa. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
