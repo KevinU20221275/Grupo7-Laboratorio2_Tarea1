@@ -1,0 +1,32 @@
+﻿@model ClothingStore.Models.Size
+
+@{
+    ViewData["Title"] = "Eliminar Talla";
+}
+
+<h1>Eliminar Talla</h1>
+
+<h3>¿Estas seguro que quieres eliminar esta Talla?</h3>
+<div>
+    <h4>Size</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 mt-3">
+            Id Talla
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2 mt-3">
+            Talla
+        </dt>
+        <dd class = "col-sm-10 mt-3">
+            @Html.DisplayFor(model => model.SizeDescription)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" class="mt-3">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+        <a asp-action="Index" class="btn btn-primary">Volver a la Lista</a>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+﻿@model ClothingStore.Models.Size
+
+@{
+    ViewData["Title"] = "Agregar Talla";
+}
+
+<h1>Agregar Talla</h1>
+
+<hr />
+<div class="row mt-3">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mt-3">
+                <label asp-for="SizeDescription" class="control-label"></label>
+                <input asp-for="SizeDescription" class="form-control" />
+                <span asp-validation-for="SizeDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-primary">Volver al Listado</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

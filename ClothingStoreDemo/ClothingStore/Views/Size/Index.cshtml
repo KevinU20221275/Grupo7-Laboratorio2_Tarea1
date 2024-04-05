@@ -1,0 +1,136 @@
+﻿@model IEnumerable<ClothingStore.Models.Size>
+
+@{
+    ViewData["Title"] = "Listado de Tallas";
+}
+
+<h1>Listado de Tallas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Nueva Talla</a>
+</p>
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table id="sizeTable" class="table table-striped table-responsive table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Talla</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SizeDescription)
+            </td>
+            <td>
+                <a asp-controller="Size"
+                    asp-action="Edit"
+                    asp-route-id="@item.Id"
+                    class="btn btn-warning">
+                    Editar
+                </a>
+                <a asp-controller="Size"
+                    asp-action="Delete"
+                    asp-route-id="@item.Id"
+                    class="btn btn-danger">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#sizeTable").DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                    {
+                        extend: 'csv',
+                        className: 'bg-info border-0 text-white',
+                        exportOptions: {
+                            columns: [1]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'bg-danger border-0 text-white',
+                        exportOptions: {
+                            columns: [1]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'bg-success border-0 text-white',
+                        exportOptions: {
+                            columns: [1]
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        target: 2,
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            })
+        })
+    </script>
+
+    <!-- funcion para mostar los alert -->
+    <script>
+        function showToast(message, gradientColors) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to right, " + gradientColors + ")"
+                }
+            }).showToast();
+        }
+    </script>
+
+    @if (TempData["addSize"] != null)
+    {
+        <script>
+            showToast("Se agrego correctamente la Talla", "#6ED725, #274412");
+        </script>
+    }
+
+    @if (TempData["editSize"] != null)
+    {
+        <script>
+            showToast("Se edito correctamente la Talla", "#00b09b, #96c93d");
+        </script>
+    }
+
+    @if (TempData["deleteSize"] != null)
+    {
+        <script>
+            showToast("Se Elimino correctamente la Talla", "#ff5500, #ff0000");
+        </script>
+    }
+
+
+}
