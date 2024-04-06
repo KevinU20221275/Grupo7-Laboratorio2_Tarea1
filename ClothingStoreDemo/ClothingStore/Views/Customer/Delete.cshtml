@@ -1,7 +1,7 @@
 ﻿@model ClothingStore.Models.Customer
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar cliente";
 }
 
 <h1>Eliminar Cliente</h1>
@@ -10,37 +10,37 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            Id Cliente
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomerFirstName)
+            Nombres
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CustomerFirstName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomerLastName)
+            Apellidos
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CustomerLastName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            Correo Electronico
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
+            Telefono
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
+            Direccion
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Address)
@@ -49,7 +49,7 @@
     
     <form asp-action="Delete">
         <hr />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-primary">Volver a la Lista</a>
+        <button type="submit" class="btn btn-danger">Eliminar <i class="bi bi-trash3-fill"></i></button>
+        <a asp-action="Index" class="btn btn-primary">Regresar <i class="bi bi-file-earmark-text-fill"></i></a>
     </form>
 </div>
