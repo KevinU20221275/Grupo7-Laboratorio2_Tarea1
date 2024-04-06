@@ -147,9 +147,9 @@ namespace ClothingStore.Controllers
             }
             catch (Exception ex)
             {
-                TempData["message"] = ex.Message;
+                TempData["message"] = "No se pudo eliminar el registro";
 
-                return View(sale);
+                return RedirectToAction(nameof(Index));
             }
         }
     }
