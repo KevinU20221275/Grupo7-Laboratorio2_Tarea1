@@ -12,5 +12,7 @@ namespace ClothingStore.Repositories.Sales
         IEnumerable<Customer> GetAllCustomers();
         IEnumerable<Employee> GetAllEmployees();
         IEnumerable<Product> GetAllProducts();
+        Customer? GetCustomerById(int id);
+        Product? GetProductById(int id);
     }
 }

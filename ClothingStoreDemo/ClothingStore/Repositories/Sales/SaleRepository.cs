@@ -44,7 +44,37 @@ namespace ClothingStore.Repositories.Sales
             }
         }
 
-       
+        // trae datos de cliente para el mensaje de correo electronico
+        public Customer? GetCustomerById(int id)
+        {
+            using (var connection = _dataAccess.GetConnection())
+            {
+                string storedProcedure = "spCustumer_GetById";
+
+                return connection.QueryFirstOrDefault<Customer>(
+                            storedProcedure,
+                            new { Id = id },
+                            commandType: CommandType.StoredProcedure
+                    );
+            }
+        }
+
+        // trae datos de producto para el mensaje de correo electronico
+        public Product? GetProductById(int id)
+        {
+            using (var connection = _dataAccess.GetConnection())
+            {
+                string storedProcedure = "spProduct_GetById";
+
+                return connection.QueryFirstOrDefault<Product>(
+                            storedProcedure,
+                            new { Id = id },
+                            commandType: CommandType.StoredProcedure
+                    );
+            }
+        }
+
+
         public IEnumerable<Sale> GetAll()
         {
             using (var connection = _dataAccess.GetConnection())
