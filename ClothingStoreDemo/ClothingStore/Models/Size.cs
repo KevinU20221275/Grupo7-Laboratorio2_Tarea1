@@ -6,7 +6,8 @@ namespace ClothingStore.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "INGRESE LA DESCRIPCIÓN")]
+        [Display(Name = "Talla")]
         public string SizeDescription { get; set; }
     }
 }
