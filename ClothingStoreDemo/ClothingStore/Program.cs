@@ -5,11 +5,14 @@ using ClothingStore.Repositories.Employees;
 using ClothingStore.Repositories.Products;
 using ClothingStore.Repositories.Sales;
 using ClothingStore.Repositories.Sizes;
+using ClothingStore.Services.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<ISizeRepository, SizeRepository>();
