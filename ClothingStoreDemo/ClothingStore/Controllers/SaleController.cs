@@ -1,21 +1,27 @@
 ﻿using ClothingStore.Models;
 using ClothingStore.Repositories.Sales;
+using ClothingStore.Services.Email;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Org.BouncyCastle.X509;
 
 namespace ClothingStore.Controllers
 {
     public class SaleController : Controller
     {
         private readonly ISaleRepository _saleRepository;
-        private SelectList _customersList;
-        private SelectList _employeesList;
-        private SelectList _productsList;
+        private readonly SelectList _customersList;
+        private readonly SelectList _employeesList;
+        private readonly SelectList _productsList;
 
-        public SaleController(ISaleRepository saleRepository)
+        private readonly IEmailService _emailService;
+
+        public SaleController(ISaleRepository saleRepository, IEmailService emailService)
         {
             _saleRepository = saleRepository;
+
+            _emailService = emailService;
 
             _customersList = new SelectList(
                     _saleRepository.GetAllCustomers(),
@@ -62,6 +68,26 @@ namespace ClothingStore.Controllers
                 _saleRepository.Add(sale);
 
                 TempData["addSale"] = "Datos Guardados con exito";
+
+                // trae datos para el mensaje de correo electronico
+                var customer = _saleRepository.GetCustomerById(sale.CustomerId);
+                var product = _saleRepository.GetProductById(sale.CustomerId);
+
+
+                Dictionary<string, string> data = new Dictionary<string, string>
+                {
+                    { "Subject", "Factura de Compra" },
+                    { "ProductName", product.ProductName.ToString() },
+                    { "SaleDate", sale.SaleDate.ToString() },
+                    { "Quantity", sale.Quantity.ToString() },
+                    { "Total", (product.Price * sale.Quantity).ToString() },
+                    { "RecepientName", customer.CustomerFirstName.ToString() },
+                    { "EmailTo", customer.Email.ToString() },
+                    { "Address", customer.Address.ToString() }
+
+                };
+
+                _emailService.SendEmail(data);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -145,7 +171,7 @@ namespace ClothingStore.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 TempData["message"] = "No se pudo eliminar el registro";
 

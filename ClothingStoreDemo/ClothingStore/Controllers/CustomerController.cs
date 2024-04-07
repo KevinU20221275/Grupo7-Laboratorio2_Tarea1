@@ -1,5 +1,6 @@
 ﻿using ClothingStore.Models;
 using ClothingStore.Repositories.Customers;
+using ClothingStore.Services.Email;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,9 +11,13 @@ namespace ClothingStore.Controllers
     {
         private readonly ICustomerRepository _customerRepository;
 
-        public CustomerController(ICustomerRepository customerRepository)
+        private readonly IEmailService _emailService;
+
+        public CustomerController(ICustomerRepository customerRepository, IEmailService emailService)
         {
             _customerRepository = customerRepository;
+
+            _emailService = emailService;
         }
 
         // GET: CustomerController
@@ -43,6 +48,15 @@ namespace ClothingStore.Controllers
                 _customerRepository.Add(customer);
 
                 TempData["addCustomer"] = "Datos Guardados con exito";
+
+                Dictionary<string, string> data = new Dictionary<string, string>
+                {
+                    { "Subject", "Registro de Cliente" },
+                    { "RecepientName", customer.CustomerFirstName.ToString() },
+                    { "EmailTo", customer.Email.ToString() }
+                };
+
+                _emailService.SendEmail(data);
 
                 return RedirectToAction(nameof(Index));
             }
