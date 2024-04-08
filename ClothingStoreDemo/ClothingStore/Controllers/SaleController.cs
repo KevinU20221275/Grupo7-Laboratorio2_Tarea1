@@ -129,7 +129,7 @@ namespace ClothingStore.Controllers
             {
                 _saleRepository.Edit(sale);
 
-                TempData["editProduct"] = "Datos Editados con exito";
+                TempData["editSale"] = "Datos Editados con exito";
 
                 return RedirectToAction(nameof(Index));
             }
