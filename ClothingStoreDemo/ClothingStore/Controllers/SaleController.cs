@@ -71,7 +71,7 @@ namespace ClothingStore.Controllers
 
                 // trae datos para el mensaje de correo electronico
                 var customer = _saleRepository.GetCustomerById(sale.CustomerId);
-                var product = _saleRepository.GetProductById(sale.CustomerId);
+                var product = _saleRepository.GetProductById(sale.ProductId);
 
 
                 Dictionary<string, string> data = new Dictionary<string, string>
